@@ -71,7 +71,7 @@ This document contains exactly 100 high-yield Java interview questions categoriz
 *   **Answer:** `float` is 32-bit single-precision. `double` is 64-bit double-precision (default for decimal values in Java).
 
 #### Q15: What is the default type of a decimal literal in Java?
-*   **Answer:** `double`. You must suffix `f` or `F` for declaring float variables (e.g. `float f = 5.5f;`).
+*   **Answer:** `double`. You must suffix `float` values with `f` (e.g. `float f = 5.5f;`).
 
 #### Q16: What is garbage collection in Java?
 *   **Answer:** It is an automatic background process that reclaims memory by destroying objects that are no longer reachable.
@@ -301,7 +301,7 @@ This document contains exactly 100 high-yield Java interview questions categoriz
 
 ---
 
-## 📂 Section 4: Tricky Placement & Java-vs-C++ Questions (Q76 - Q100)
+## 📂 Section 4: Tricky Placement & Algorithmic Questions (Q76 - Q100)
 
 #### Q76: What is the NullPointerException trap in unboxing?
 *   **Answer:** Trying to unbox a `null` wrapper variable to primitive type throws `NullPointerException`.
@@ -328,8 +328,9 @@ This document contains exactly 100 high-yield Java interview questions categoriz
 #### Q79: Can we use `System.out.print` to format float limits?
 *   **Answer:** Use `System.out.printf("%.2f", value)` similar to C++ `printf`.
 
-#### Q80: How does Java handle integer division?
-*   **Answer:** Discards decimal remainder. `5 / 2` evaluates to `2`. To retain decimal, cast to `double`: `(double) 5 / 2`.
+#### Q80: Why must the array/search space be sorted for Binary Search?
+*   **Answer:** Binary Search assumes that elements are ordered. If $arr[mid] < target$, it assumes the target can only be to the right of $mid$, which fails if unsorted.
+*   **Hinglish:** Sorted hoga tabhi toh decide kar payenge ki right jana hai ya left. Unsorted mein is boundary check ka koi matlab nahi rehta.
 
 #### Q81: What is string concatenation inside a loop time complexity?
 *   **Answer:** $O(N^2)$ due to allocation of new string copies at each iteration.
@@ -353,41 +354,43 @@ This document contains exactly 100 high-yield Java interview questions categoriz
 #### Q87: What is the range of values cached by Integer class?
 *   **Answer:** $-128$ to $127$. Comparing two `Integer` objects within this range using `==` returns `true`. Outside this range, it checks references and returns `false`.
 
-#### Q88: Why is `1 / 0` in Java throwing an exception but `1.0 / 0.0` does not?
-*   **Answer:** Integer division by zero throws `ArithmeticException`. Floating-point division by zero evaluates to `Double.POSITIVE_INFINITY`.
+#### Q88: How do you calculate `mid` safely in Java to prevent overflow?
+*   **Answer:** Use `int mid = low + (high - low) / 2;` instead of `(low + high) / 2`.
+*   **Hinglish:** `low + high` karne par agar variable key capacity boundary (2147483647) cross ho jaye toh negative result dega (overflow trap). `low + (high - low)/2` isse bachata hai.
 
-#### Q89: How to find frequency of elements in string?
-*   **Answer:** Use `int[] count = new int[256]` mapping char codes to counts.
+#### Q89: What is the difference between Lower Bound and Upper Bound?
+*   **Answer:** Lower Bound returns index of first element $\ge$ target. Upper Bound returns index of first element $>$ target.
 
-#### Q90: Does Java support operator overloading?
-*   **Answer:** Java only overloads the `+` operator for String concatenation. User-defined operator overloading is not supported.
+#### Q90: What is the concept of Binary Search on Answer?
+*   **Answer:** Binary searching on a monotonic search space of potential values (answers) and validating each step using a helper method.
 
-#### Q91: What is the difference between class template in C++ and Generics in Java?
-*   **Answer:** C++ templates create new class instances for each type parameter. Java Generics use type erasure, converting parameters to `Object` at runtime.
+#### Q91: Why is Binary Search $O(\log N)$?
+*   **Answer:** Because it halves the search space at each iteration. Reducing $N$ to $1$ takes $\log_2(N)$ divisions.
+*   **Hinglish:** Har check par search space aadhi ho jati hai, isliye time $\log N$ hota hai.
 
-#### Q92: What is the size of `long` in Java?
-*   **Answer:** Always 64-bit (8 bytes).
+#### Q92: What is the difference between Iterative and Recursive Binary Search?
+*   **Answer:** Iterative uses a while loop and runs in $O(1)$ space. Recursive calls itself and takes $O(\log N)$ auxiliary stack space.
 
-#### Q93: Can we declare main method private?
-*   **Answer:** Yes, it compiles, but JVM will not recognize it to start execution.
+#### Q93: What is recursion?
+*   **Answer:** A programming technique where a method calls itself to solve smaller sub-problems.
 
-#### Q94: What is default type of float literals in Java?
-*   **Answer:** Double. Suffix `f` is required.
+#### Q94: What is a recursion base case, and what happens if it is missing?
+*   **Answer:** The termination condition. If missing, the recursion calls itself infinitely, exhausting call stack memory and throwing `StackOverflowError`.
 
-#### Q95: Can we inherit constructors in Java?
-*   **Answer:** No. Constructors are invoked using `super()` but not inherited.
+#### Q95: What happens internally in the JVM when a method calls itself recursively?
+*   **Answer:** JVM pushes a new stack frame (containing arguments and local variables) onto the thread call stack. It pops frames when returning.
 
-#### Q96: What is the garbage collector daemon thread?
-*   **Answer:** It is a low-priority thread running in background.
+#### Q96: What is recursion stack space complexity?
+*   **Answer:** The maximum depth of active stack frames on the call stack, typically equal to $O(H)$ where $H$ is recursion tree height.
 
-#### Q97: What is the difference between `static` block and constructor?
-*   **Answer:** Static block runs once when class loads. Constructor runs whenever an object is instantiated.
+#### Q97: What is the difference between Recursion and Iteration?
+*   **Answer:** Iteration uses loops, runs in $O(1)$ space, and has low overhead. Recursion is cleaner for tree/subset structures but has $O(N)$ stack memory overhead.
 
-#### Q98: Can we make constructor final?
-*   **Answer:** No. Constructors cannot be overridden.
+#### Q98: Why does recursion cause a `StackOverflowError` in Java?
+*   **Answer:** Because call stack size is limited. Deep recursion allocations consume all stack memory.
 
-#### Q99: What is the difference between C++ struct and Java class?
-*   **Answer:** C++ struct has default public access. Java does not have `struct`.
+#### Q99: What is the Include/Exclude (Pick/Not Pick) recursion pattern?
+*   **Answer:** A backtracking technique that decides to either include an element or exclude it, branching the recursion tree to generate subsets/subsequences.
 
-#### Q100: How does Java handle memory allocations?
-*   **Answer:** Stack memory stores variables and reference points. Heap memory stores actual objects and arrays.
+#### Q100: How do memory allocations work for variables in Java?
+*   **Answer:** Stack memory stores primitive variables and reference variables. Heap memory stores all class objects, collection objects, and array elements.

@@ -45,6 +45,49 @@ This guide serves as a cheat sheet for C++ developers to revise Java concepts qu
 
 ---
 
+## 🔍 Binary Search Revision Summary
+*   **Standard Template:**
+    ```java
+    int low = 0, high = arr.length - 1;
+    while(low <= high) {
+        int mid = low + (high - low)/2; // Overflow safe
+        if(arr[mid] == target) return mid;
+        else if(arr[mid] < target) low = mid + 1;
+        else high = mid - 1;
+    }
+    ```
+*   **Bounds:**
+    *   *Lower Bound (element $\ge$ target):* `if (arr[mid] >= target) { ans = mid; high = mid - 1; }`
+    *   *Upper Bound (element $>$ target):* `if (arr[mid] > target) { ans = mid; high = mid - 1; }`
+*   **BS on Answer:** Low/High set to bounds of answer range. Use validation check method: `if (isValid(arr, mid)) { ans = mid; high = mid - 1; } else { low = mid + 1; }`.
+*   **Mistake:** Using `(low + high) / 2` causing overflow.
+*   **Complexity:** Time: $O(\log N)$, Space: $O(1)$ iterative, $O(\log N)$ recursive stack.
+
+---
+
+## 🔄 Recursion Revision Summary
+*   **Key Elements:**
+    1.  *Base Case:* Terminal condition preventing infinite recursion.
+    2.  *Recursive Case:* Problem dividing step calling itself.
+    3.  *Call Stack:* Allocation of stack frames for parameters/locals.
+*   **Include/Exclude (Pick/Not Pick) Template:**
+    ```java
+    public void getSubseq(int idx, List<Integer> ds, int[] arr, List<List<Integer>> ans) {
+        if (idx == arr.length) {
+            ans.add(new ArrayList<>(ds)); // Deep copy!
+            return;
+        }
+        ds.add(arr[idx]); // Pick
+        getSubseq(idx + 1, ds, arr, ans);
+        ds.remove(ds.size() - 1); // Backtrack / Exclude
+        getSubseq(idx + 1, ds, arr, ans);
+    }
+    ```
+*   **Mistake:** Writing `ans.add(ds)` directly copies reference address. Modifying `ds` afterwards corrupts output. Use `new ArrayList<>(ds)`.
+*   **Complexity:** Subsets/Subsequences: $O(2^N)$ time, $O(N)$ space. Permutations: $O(N!)$ time.
+
+---
+
 ## 🪤 Common Java Coding Traps
 
 1.  **Scanner Newline Trap:**
@@ -76,3 +119,5 @@ This guide serves as a cheat sheet for C++ developers to revise Java concepts qu
 - [ ] **Limits:** `Integer.MAX_VALUE`, `Integer.MIN_VALUE`, `Long.MAX_VALUE`.
 - [ ] **Compilation:** `javac Main.java` and execution `java Main`.
 - [ ] **Strict Conditions:** Ensure loop and if checks are boolean expressions only. No `if (1)` is allowed.
+- [ ] **Binary Search:** Safe `mid` calculation, `lowerBound` and `upperBound` conditionals.
+- [ ] **Recursion Backtracking:** `ds.add()` followed by recursive calls and backtracking `ds.remove(ds.size() - 1)`, deep copying list results.

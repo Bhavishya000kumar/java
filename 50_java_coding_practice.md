@@ -4,12 +4,11 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-## 📂 Section 1: Java Basics & Arrays (Q1 - Q15)
+## 📂 Section 1: Java Basics & Arrays (Q1 - Q10)
 
 ### Q1: Print Fibonacci Series (Iterative)
 *   **Problem Statement:** Return the N-th Fibonacci number.
 *   **C++ Logic:** Loop and swap dynamic values.
-*   **Java Approach:** Implement standard iteration using variables.
 *   **Java Code:**
     ```java
     public int fibonacci(int n) {
@@ -23,7 +22,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
         return b;
     }
     ```
-*   **Explanation:** Sum elements up to N using values.
+*   **Explanation:** Sum elements up to N using variables.
 *   **Expected Output:** `fibonacci(5) -> 5`
 *   **Complexity:** Time: $O(N)$, Space: $O(1)$
 *   **Interview Point:** Handled iteratively to avoid $O(2^N)$ recursion overhead.
@@ -34,7 +33,6 @@ This document contains exactly 50 practice coding questions designed to bridge y
 ### Q2: Sum of Elements in Array
 *   **Problem Statement:** Find the sum of all elements in an array.
 *   **C++ Logic:** `accumulate(arr.begin(), arr.end(), 0)`
-*   **Java Approach:** Iteration loop.
 *   **Java Code:**
     ```java
     public int sumArray(int[] arr) {
@@ -43,15 +41,17 @@ This document contains exactly 50 practice coding questions designed to bridge y
         return sum;
     }
     ```
+*   **Explanation:** Iterate and accumulate.
+*   **Expected Output:** `sumArray({1, 2, 3}) -> 6`
 *   **Complexity:** Time: $O(N)$, Space: $O(1)$
-*   **Common Mistake:** Subsum integer overflow. Use `long` if values are large.
+*   **Interview Point:** Use `long` if total sum exceeds integer boundaries.
+*   **Common Mistake:** Subsum integer overflow.
 
 ---
 
 ### Q3: Max Element in Array
 *   **Problem Statement:** Find the maximum element.
 *   **C++ Logic:** `*max_element(arr, arr+n)`
-*   **Java Approach:** Traverse, maintain local maximum.
 *   **Java Code:**
     ```java
     public int findMax(int[] arr) {
@@ -60,14 +60,16 @@ This document contains exactly 50 practice coding questions designed to bridge y
         return max;
     }
     ```
+*   **Explanation:** Iterate, updating local maximum using `Math.max()`.
+*   **Expected Output:** `findMax({1, 5, 3}) -> 5`
 *   **Complexity:** Time: $O(N)$, Space: $O(1)$
+*   **Interview Point:** Initializing with `Integer.MIN_VALUE` rather than `0` (handles negative numbers).
 
 ---
 
 ### Q4: Reverse an Array (In-place)
 *   **Problem Statement:** Reverse array elements in-place.
 *   **C++ Logic:** `reverse(arr.begin(), arr.end())`
-*   **Java Approach:** Two-pointer swap.
 *   **Java Code:**
     ```java
     public void reverseArray(int[] arr) {
@@ -81,13 +83,13 @@ This document contains exactly 50 practice coding questions designed to bridge y
     }
     ```
 *   **Complexity:** Time: $O(N)$, Space: $O(1)$
+*   **Common Mistake:** Iterating until `arr.length` instead of midpoint, reversing it back.
 
 ---
 
 ### Q5: Check if Array is Sorted
 *   **Problem Statement:** Check if array is sorted in ascending order.
 *   **C++ Logic:** Check `arr[i] <= arr[i+1]`.
-*   **Java Approach:** Same logic.
 *   **Java Code:**
     ```java
     public boolean isSorted(int[] arr) {
@@ -103,8 +105,6 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ### Q6: Count Even and Odd Numbers
 *   **Problem Statement:** Return the count of even and odd integers.
-*   **C++ Logic:** Modular arithmetic verification.
-*   **Java Approach:** Scan and return inline array counts.
 *   **Java Code:**
     ```java
     public int[] countEvenOdd(int[] arr) {
@@ -117,12 +117,12 @@ This document contains exactly 50 practice coding questions designed to bridge y
     }
     ```
 *   **Complexity:** Time: $O(N)$, Space: $O(1)$
+*   **Interview Point:** Shows returning inline arrays in Java (`new int[]{}`).
 
 ---
 
 ### Q7: Find Index of Element (Linear Search)
 *   **Problem Statement:** Return index of key or -1.
-*   **C++ Logic:** Linear traversal search.
 *   **Java Code:**
     ```java
     public int linearSearch(int[] arr, int target) {
@@ -147,6 +147,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
     }
     ```
 *   **Complexity:** Time: $O(N)$, Space: $O(1)$
+*   **Common Mistake:** Doing integer division `sum / arr.length` if `sum` is defined as `int`. Define `sum` as `double` or cast it.
 
 ---
 
@@ -188,88 +189,9 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q11: Find Unique Elements (No Duplicates)
-*   **Problem Statement:** Return unique items.
-*   **Java Approach:** Use `HashSet`.
-*   **Java Code:**
-    ```java
-    import java.util.HashSet;
-    public int[] getUnique(int[] arr) {
-        HashSet<Integer> set = new HashSet<>();
-        for (int num : arr) set.add(num);
-        int[] res = new int[set.size()];
-        int idx = 0;
-        for (int num : set) res[idx++] = num;
-        return res;
-    }
-    ```
-*   **Complexity:** Time: $O(N)$, Space: $O(N)$
+## 📂 Section 2: Strings, ArrayList & HashMaps (Q11 - Q20)
 
----
-
-### Q12: Copy Elements to Another Array
-*   **Problem Statement:** Replicate arrays.
-*   **Java Code:**
-    ```java
-    import java.util.Arrays;
-    public int[] copyArray(int[] arr) {
-        return Arrays.copyOf(arr, arr.length);
-    }
-    ```
-*   **Complexity:** Time: $O(N)$, Space: $O(N)$
-
----
-
-### Q13: Swap Elements in Array
-*   **Problem Statement:** Swap elements at index $i$ and $j$.
-*   **Java Code:**
-    ```java
-    public void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-    ```
-*   **Complexity:** Time: $O(1)$, Space: $O(1)$
-
----
-
-### Q14: Print 2D Array Grid
-*   **Problem Statement:** Print grid values row-by-row.
-*   **Java Code:**
-    ```java
-    public void printGrid(int[][] grid) {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                System.out.print(grid[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-    ```
-*   **Complexity:** Time: $O(R \times C)$, Space: $O(1)$
-
----
-
-### Q15: Matrix Diagonal Sum
-*   **Problem Statement:** Sum primary diagonal elements.
-*   **Java Code:**
-    ```java
-    public int primaryDiagonalSum(int[][] grid) {
-        int sum = 0;
-        for (int i = 0; i < grid.length; i++) {
-            sum += grid[i][i];
-        }
-        return sum;
-    }
-    ```
-*   **Complexity:** Time: $O(N)$, Space: $O(1)$
-
----
-
-## 📂 Section 2: Strings, ArrayList & HashMaps (Q16 - Q30)
-
-### Q16: Reverse a String
+### Q11: Reverse a String
 *   **Problem Statement:** Return the reversed string.
 *   **Java Code:**
     ```java
@@ -281,7 +203,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q17: Count Vowels and Consonants
+### Q12: Count Vowels and Consonants
 *   **Problem Statement:** Return counts of vowels and consonants.
 *   **Java Code:**
     ```java
@@ -302,7 +224,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q18: Check for Substring
+### Q13: Check for Substring
 *   **Problem Statement:** Verify if a string contains another.
 *   **Java Code:**
     ```java
@@ -314,7 +236,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q19: Count Words in a String
+### Q14: Count Words in a String
 *   **Problem Statement:** Return the word count.
 *   **Java Code:**
     ```java
@@ -327,7 +249,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q20: First Non-Repeating Character
+### Q15: First Non-Repeating Character
 *   **Problem Statement:** Find first unique character index.
 *   **Java Code:**
     ```java
@@ -344,11 +266,11 @@ This document contains exactly 50 practice coding questions designed to bridge y
         return -1;
     }
     ```
-*   **Complexity:** Time: $O(N)$, Space: $O(1)$ (limited alphabet sizes).
+*   **Complexity:** Time: $O(N)$, Space: $O(1)$
 
 ---
 
-### Q21: Check if Anagram
+### Q16: Check if Anagram
 *   **Problem Statement:** Check if s and t are anagrams.
 *   **Java Code:**
     ```java
@@ -367,7 +289,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q22: Remove All Spaces
+### Q17: Remove All Spaces
 *   **Problem Statement:** Remove whitespaces.
 *   **Java Code:**
     ```java
@@ -379,7 +301,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q23: Print ArrayList Elements
+### Q18: Print ArrayList Elements
 *   **Problem Statement:** Print list content.
 *   **Java Code:**
     ```java
@@ -393,7 +315,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q24: Check if List is Empty
+### Q19: Check if List is Empty
 *   **Problem Statement:** Verify sizing.
 *   **Java Code:**
     ```java
@@ -406,7 +328,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q25: Frequency of Strings in List
+### Q20: Frequency of Strings in List
 *   **Problem Statement:** Map strings to occurrences.
 *   **Java Code:**
     ```java
@@ -424,107 +346,9 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q26: Remove Duplicates from ArrayList
-*   **Problem Statement:** Keep unique items.
-*   **Java Code:**
-    ```java
-    import java.util.ArrayList;
-    import java.util.LinkedHashSet;
-    public ArrayList<Integer> removeDuplicates(ArrayList<Integer> list) {
-        LinkedHashSet<Integer> set = new LinkedHashSet<>(list);
-        return new ArrayList<>(set);
-    }
-    ```
-*   **Complexity:** Time: $O(N)$, Space: $O(N)$
+## 📂 Section 3: Pointers, Sliding Window, Prefix Sum & Kadane (Q21 - Q30)
 
----
-
-### Q27: Check Subset of Array
-*   **Problem Statement:** Verify if B is subset of A.
-*   **Java Code:**
-    ```java
-    import java.util.HashSet;
-    public boolean isSubset(int[] a, int[] b) {
-        HashSet<Integer> set = new HashSet<>();
-        for (int num : a) set.add(num);
-        for (int num : b) {
-            if (!set.contains(num)) return false;
-        }
-        return true;
-    }
-    ```
-*   **Complexity:** Time: $O(N + M)$, Space: $O(N)$
-
----
-
-### Q28: Intersection of Arrays using HashSet
-*   **Problem Statement:** Return overlapping values.
-*   **Java Code:**
-    ```java
-    import java.util.HashSet;
-    import java.util.ArrayList;
-    public int[] intersection(int[] a, int[] b) {
-        HashSet<Integer> set1 = new HashSet<>();
-        for (int num : a) set1.add(num);
-        HashSet<Integer> intersect = new HashSet<>();
-        for (int num : b) {
-            if (set1.contains(num)) intersect.add(num);
-        }
-        int[] res = new int[intersect.size()];
-        int idx = 0;
-        for (int num : intersect) res[idx++] = num;
-        return res;
-    }
-    ```
-*   **Complexity:** Time: $O(N + M)$, Space: $O(N)$
-
----
-
-### Q29: First Repeating Element
-*   **Problem Statement:** Find the first element that repeats.
-*   **Java Code:**
-    ```java
-    import java.util.HashSet;
-    public int firstRepeating(int[] arr) {
-        HashSet<Integer> set = new HashSet<>();
-        int firstRep = -1;
-        for (int i = arr.length - 1; i >= 0; i--) {
-            if (set.contains(arr[i])) firstRep = arr[i];
-            else set.add(arr[i]);
-        }
-        return firstRep;
-    }
-    ```
-*   **Complexity:** Time: $O(N)$, Space: $O(N)$
-
----
-
-### Q30: String Compression (Runs)
-*   **Problem Statement:** Compress string e.g. "aabcc" to "a2b1c2".
-*   **Java Code:**
-    ```java
-    public String compress(String s) {
-        if (s == null || s.isEmpty()) return s;
-        StringBuilder sb = new StringBuilder();
-        int count = 1;
-        for (int i = 1; i <= s.length(); i++) {
-            if (i < s.length() && s.charAt(i) == s.charAt(i - 1)) {
-                count++;
-            } else {
-                sb.append(s.charAt(i - 1)).append(count);
-                count = 1;
-            }
-        }
-        return sb.toString();
-    }
-    ```
-*   **Complexity:** Time: $O(N)$, Space: $O(N)$
-
----
-
-## 📂 Section 3: Core DSA Patterns (Q31 - Q40)
-
-### Q31: Two Sum (Pointers Style)
+### Q21: Two Sum (Pointers Style)
 *   **Problem Statement:** Check if pair exists with target sum in sorted array.
 *   **Java Code:**
     ```java
@@ -543,7 +367,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q32: Longest Subarray with Sum <= K (Sliding Window)
+### Q22: Longest Subarray with Sum <= K (Sliding Window)
 *   **Problem Statement:** Find length of longest subarray.
 *   **Java Code:**
     ```java
@@ -563,7 +387,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q33: Range Sum Query (Prefix Sum)
+### Q23: Range Sum Query (Prefix Sum)
 *   **Problem Statement:** Answer queries $Q(L, R)$ in $O(1)$ time.
 *   **Java Code:**
     ```java
@@ -584,26 +408,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q34: Binary Search implementation
-*   **Problem Statement:** Standard binary search.
-*   **Java Code:**
-    ```java
-    public int binarySearch(int[] arr, int target) {
-        int low = 0, high = arr.length - 1;
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-            if (arr[mid] == target) return mid;
-            else if (arr[mid] < target) low = mid + 1;
-            else high = mid - 1;
-        }
-        return -1;
-    }
-    ```
-*   **Complexity:** Time: $O(\log N)$, Space: $O(1)$
-
----
-
-### Q35: Kadane's Algorithm (Max Subarray Sum)
+### Q24: Kadane's Algorithm (Max Subarray Sum)
 *   **Problem Statement:** Find largest subarray sum.
 *   **Java Code:**
     ```java
@@ -621,7 +426,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q36: Container With Most Water (Two Pointers)
+### Q25: Container With Most Water (Two Pointers)
 *   **Problem Statement:** Maximize area $(j - i) \times \min(arr[i], arr[j])$.
 *   **Java Code:**
     ```java
@@ -640,7 +445,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q37: Subarray with Given Sum (Hashing)
+### Q26: Subarray with Given Sum (Hashing)
 *   **Problem Statement:** Check if subarray exists with sum $K$.
 *   **Java Code:**
     ```java
@@ -661,25 +466,7 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q38: Find Peak Element (Binary Search style)
-*   **Problem Statement:** Return index of local maximum.
-*   **Java Code:**
-    ```java
-    public int findPeak(int[] arr) {
-        int low = 0, high = arr.length - 1;
-        while (low < high) {
-            int mid = low + (high - low) / 2;
-            if (arr[mid] < arr[mid + 1]) low = mid + 1;
-            else high = mid;
-        }
-        return low;
-    }
-    ```
-*   **Complexity:** Time: $O(\log N)$, Space: $O(1)$
-
----
-
-### Q39: Find Equilibrium Index
+### Q27: Find Equilibrium Index
 *   **Problem Statement:** Find index $i$ where prefix sum equals suffix sum.
 *   **Java Code:**
     ```java
@@ -698,12 +485,12 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q40: Count Subarrays with Odd Sum
+### Q28: Count Subarrays with Odd Sum
 *   **Problem Statement:** Return count of odd sum subarrays.
 *   **Java Code:**
     ```java
     public int countOddSubarrays(int[] arr) {
-        int oddCount = 0, evenCount = 1; // evenCount initialized to 1 for prefix sum = 0
+        int oddCount = 0, evenCount = 1;
         int currentSum = 0, total = 0;
         for (int num : arr) {
             currentSum += num;
@@ -722,9 +509,402 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-## 📂 Section 4: Placement-Level Problems (Q41 - Q50)
+### Q29: Remove Duplicates from ArrayList
+*   **Problem Statement:** Keep unique items.
+*   **Java Code:**
+    ```java
+    import java.util.ArrayList;
+    import java.util.LinkedHashSet;
+    public ArrayList<Integer> removeDuplicates(ArrayList<Integer> list) {
+        LinkedHashSet<Integer> set = new LinkedHashSet<>(list);
+        return new ArrayList<>(set);
+    }
+    ```
+*   **Complexity:** Time: $O(N)$, Space: $O(N)$
 
-### Q41: Merge Intervals
+---
+
+### Q30: Intersection of Arrays using HashSet
+*   **Problem Statement:** Return overlapping values.
+*   **Java Code:**
+    ```java
+    import java.util.HashSet;
+    public int[] intersection(int[] a, int[] b) {
+        HashSet<Integer> set1 = new HashSet<>();
+        for (int num : a) set1.add(num);
+        HashSet<Integer> intersect = new HashSet<>();
+        for (int num : b) {
+            if (set1.contains(num)) intersect.add(num);
+        }
+        int[] res = new int[intersect.size()];
+        int idx = 0;
+        for (int num : intersect) res[idx++] = num;
+        return res;
+    }
+    ```
+*   **Complexity:** Time: $O(N + M)$, Space: $O(N)$
+
+---
+
+## 📂 Section 4: Binary Search Problems (Q31 - Q40)
+
+### Q31: Standard Binary Search
+*   **Problem Statement:** Return target element index in sorted array or -1.
+*   **Java Code:**
+    ```java
+    public int binarySearch(int[] arr, int target) {
+        int low = 0, high = arr.length - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] == target) return mid;
+            else if (arr[mid] < target) low = mid + 1;
+            else high = mid - 1;
+        }
+        return -1;
+    }
+    ```
+*   **Complexity:** Time: $O(\log N)$, Space: $O(1)$
+
+---
+
+### Q32: Lower Bound Implementation
+*   **Problem Statement:** First index of element $\ge$ target.
+*   **Java Code:**
+    ```java
+    public int lowerBound(int[] arr, int target) {
+        int low = 0, high = arr.length - 1, ans = arr.length;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] >= target) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+    ```
+*   **Complexity:** Time: $O(\log N)$, Space: $O(1)$
+
+---
+
+### Q33: Upper Bound Implementation
+*   **Problem Statement:** First index of element $>$ target.
+*   **Java Code:**
+    ```java
+    public int upperBound(int[] arr, int target) {
+        int low = 0, high = arr.length - 1, ans = arr.length;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] > target) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+    ```
+*   **Complexity:** Time: $O(\log N)$, Space: $O(1)$
+
+---
+
+### Q34: First and Last Position of Element
+*   **Problem Statement:** Find boundaries of target element.
+*   **Java Code:**
+    ```java
+    public int[] searchRange(int[] nums, int target) {
+        int first = findBound(nums, target, true);
+        int last = findBound(nums, target, false);
+        return new int[]{first, last};
+    }
+    private int findBound(int[] nums, int target, boolean isFirst) {
+        int low = 0, high = nums.length - 1, ans = -1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] == target) {
+                ans = mid;
+                if (isFirst) high = mid - 1;
+                else low = mid + 1;
+            } else if (nums[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return ans;
+    }
+    ```
+*   **Complexity:** Time: $O(\log N)$, Space: $O(1)$
+
+---
+
+### Q35: Search in Rotated Sorted Array
+*   **Problem Statement:** Search target element in rotated sorted array.
+*   **Java Code:**
+    ```java
+    public int search(int[] nums, int target) {
+        int low = 0, high = nums.length - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] == target) return mid;
+            if (nums[low] <= nums[mid]) {
+                if (target >= nums[low] && target < nums[mid]) high = mid - 1;
+                else low = mid + 1;
+            } else {
+                if (target > nums[mid] && target <= nums[high]) low = mid + 1;
+                else high = mid - 1;
+            }
+        }
+        return -1;
+    }
+    ```
+*   **Complexity:** Time: $O(\log N)$, Space: $O(1)$
+
+---
+
+### Q36: Find Peak Element
+*   **Problem Statement:** Find index of local maximum.
+*   **Java Code:**
+    ```java
+    public int findPeak(int[] arr) {
+        int low = 0, high = arr.length - 1;
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] < arr[mid + 1]) low = mid + 1;
+            else high = mid;
+        }
+        return low;
+    }
+    ```
+*   **Complexity:** Time: $O(\log N)$, Space: $O(1)$
+
+---
+
+### Q37: Square Root of Integer
+*   **Problem Statement:** Floor square root of N.
+*   **Java Code:**
+    ```java
+    public int mySqrt(int x) {
+        if (x == 0 || x == 1) return x;
+        int low = 1, high = x, ans = 0;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (mid <= x / mid) {
+                ans = mid;
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return ans;
+    }
+    ```
+*   **Complexity:** Time: $O(\log N)$, Space: $O(1)$
+
+---
+
+### Q38: Single Element in Sorted Array
+*   **Problem Statement:** Find element that appears once in a pair array.
+*   **Java Code:**
+    ```java
+    public int singleNonDuplicate(int[] nums) {
+        int low = 0, high = nums.length - 2;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (nums[mid] == nums[mid ^ 1]) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return nums[low];
+    }
+    ```
+*   **Complexity:** Time: $O(\log N)$, Space: $O(1)$
+
+---
+
+### Q39: Koko Eating Bananas (BS on Answer)
+*   **Problem Statement:** Minimum eating speed to finish within $H$ hours.
+*   **Java Code:**
+    ```java
+    public int minEatingSpeed(int[] piles, int h) {
+        int low = 1, high = 1000000000;
+        int ans = high;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (canEatAll(piles, mid, h)) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+    private boolean canEatAll(int[] piles, int speed, int h) {
+        long hours = 0;
+        for (int pile : piles) {
+            hours += (pile + speed - 1) / speed;
+        }
+        return hours <= h;
+    }
+    ```
+*   **Complexity:** Time: $O(N \log(\max(\text{piles})))$, Space: $O(1)$
+
+---
+
+### Q40: Capacity to Ship Packages (BS on Answer)
+*   **Problem Statement:** Minimum capacity of ship to deliver packages in $D$ days.
+*   **Java Code:**
+    ```java
+    public int shipWithinDays(int[] weights, int days) {
+        int low = 0, high = 0;
+        for (int w : weights) {
+            low = Math.max(low, w);
+            high += w;
+        }
+        int ans = high;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (canShip(weights, mid, days)) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+    private boolean canShip(int[] weights, int capacity, int days) {
+        int currentDays = 1, currentWeight = 0;
+        for (int w : weights) {
+            if (currentWeight + w > capacity) {
+                currentDays++;
+                currentWeight = 0;
+            }
+            currentWeight += w;
+        }
+        return currentDays <= days;
+    }
+    ```
+*   **Complexity:** Time: $O(N \log(\text{sum} - \text{max}))$, Space: $O(1)$
+
+---
+
+## 📂 Section 5: Recursion Problems (Q41 - Q45)
+
+### Q41: Print 1 to N using Recursion
+*   **Problem Statement:** Print numbers from 1 to N without loops.
+*   **Java Code:**
+    ```java
+    public void print1ToN(int n) {
+        if (n == 0) return;
+        print1ToN(n - 1);
+        System.out.print(n + " ");
+    }
+    ```
+*   **Complexity:** Time: $O(N)$, Space: $O(N)$ (recursion stack).
+
+---
+
+### Q42: Factorial of a Number
+*   **Problem Statement:** Calculate factorial.
+*   **Java Code:**
+    ```java
+    public int factorial(int n) {
+        if (n <= 1) return 1;
+        return n * factorial(n - 1);
+    }
+    ```
+*   **Complexity:** Time: $O(N)$, Space: $O(N)$
+
+---
+
+### Q43: Generate Subsequences (Include / Exclude)
+*   **Problem Statement:** Return all subsequences.
+*   **Java Code:**
+    ```java
+    import java.util.ArrayList;
+    import java.util.List;
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        solve(0, new ArrayList<>(), nums, ans);
+        return ans;
+    }
+    private void solve(int idx, List<Integer> ds, int[] nums, List<List<Integer>> ans) {
+        if (idx == nums.length) {
+            ans.add(new ArrayList<>(ds)); // Deep copy!
+            return;
+        }
+        ds.add(nums[idx]); // Pick
+        solve(idx + 1, ds, nums, ans);
+        ds.remove(ds.size() - 1); // Backtrack
+        solve(idx + 1, ds, nums, ans); // Not Pick
+    }
+    ```
+*   **Complexity:** Time: $O(2^N \times N)$, Space: $O(N)$
+
+---
+
+### Q44: Subset Sum Validation (Recursive)
+*   **Problem Statement:** Check if subset with sum $K$ exists.
+*   **Java Code:**
+    ```java
+    public boolean checkSubsetSum(int idx, int sum, int[] arr, int target) {
+        if (sum == target) return true;
+        if (idx == arr.length || sum > target) return false;
+        
+        // Pick
+        if (checkSubsetSum(idx + 1, sum + arr[idx], arr, target)) return true;
+        // Not Pick
+        return checkSubsetSum(idx + 1, sum, arr, target);
+    }
+    ```
+*   **Complexity:** Time: $O(2^N)$, Space: $O(N)$
+
+---
+
+### Q45: Basic Permutations Generation
+*   **Problem Statement:** Generate all unique permutations.
+*   **Java Code:**
+    ```java
+    import java.util.ArrayList;
+    import java.util.List;
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        solve(0, nums, ans);
+        return ans;
+    }
+    private void solve(int idx, int[] nums, List<List<Integer>> ans) {
+        if (idx == nums.length) {
+            List<Integer> ds = new ArrayList<>();
+            for (int x : nums) ds.add(x);
+            ans.add(ds);
+            return;
+        }
+        for (int i = idx; i < nums.length; i++) {
+            swap(nums, idx, i);
+            solve(idx + 1, nums, ans);
+            swap(nums, idx, i); // Backtrack
+        }
+    }
+    private void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    ```
+*   **Complexity:** Time: $O(N! \times N)$, Space: $O(N)$
+
+---
+
+## 📂 Section 6: Placement-Level Mixed Problems (Q46 - Q50)
+
+### Q46: Merge Intervals
 *   **Problem Statement:** Merge overlapping intervals.
 *   **Java Code:**
     ```java
@@ -747,12 +927,12 @@ This document contains exactly 50 practice coding questions designed to bridge y
         return list.toArray(new int[list.size()][]);
     }
     ```
-*   **Complexity:** Time: $O(N \log N)$, Space: $O(N)$ for sorting/output.
+*   **Complexity:** Time: $O(N \log N)$, Space: $O(N)$
 
 ---
 
-### Q42: Product of Array Except Self
-*   **Problem Statement:** Calculate output where $res[i]$ is product of all elements except $arr[i]$. No division allowed.
+### Q47: Product of Array Except Self
+*   **Problem Statement:** Return array where $res[i]$ is product of all elements except $arr[i]$.
 *   **Java Code:**
     ```java
     public int[] productExceptSelf(int[] nums) {
@@ -774,8 +954,8 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q43: Next Permutation
-*   **Problem Statement:** Compute lexicographically next permutation.
+### Q48: Next Permutation
+*   **Problem Statement:** Next lexicographical permutation.
 *   **Java Code:**
     ```java
     public void nextPermutation(int[] nums) {
@@ -801,35 +981,8 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q44: Longest Consecutive Sequence
-*   **Problem Statement:** Length of longest consecutive elements sequence.
-*   **Java Code:**
-    ```java
-    import java.util.HashSet;
-    public int longestConsecutive(int[] nums) {
-        HashSet<Integer> set = new HashSet<>();
-        for (int num : nums) set.add(num);
-        int max = 0;
-        for (int num : nums) {
-            if (!set.contains(num - 1)) {
-                int currNum = num;
-                int currStreak = 1;
-                while (set.contains(currNum + 1)) {
-                    currNum++;
-                    currStreak++;
-                }
-                max = Math.max(max, currStreak);
-            }
-        }
-        return max;
-    }
-    ```
-*   **Complexity:** Time: $O(N)$, Space: $O(N)$
-
----
-
-### Q45: Spiral Matrix Traversal
-*   **Problem Statement:** Return list of elements in spiral order.
+### Q49: Spiral Matrix Traversal
+*   **Problem Statement:** Spiral matrix elements output list.
 *   **Java Code:**
     ```java
     import java.util.ArrayList;
@@ -859,8 +1012,8 @@ This document contains exactly 50 practice coding questions designed to bridge y
 
 ---
 
-### Q46: Valid Parentheses (Stack)
-*   **Problem Statement:** Check if braces match correctly.
+### Q50: Valid Parentheses (Stack)
+*   **Problem Statement:** Verify brace matching validity.
 *   **Java Code:**
     ```java
     import java.util.Stack;
@@ -876,104 +1029,5 @@ This document contains exactly 50 practice coding questions designed to bridge y
     }
     ```
 *   **Complexity:** Time: $O(N)$, Space: $O(N)$
-
----
-
-### Q47: Sort Colors (Sort 0s, 1s, 2s)
-*   **Problem Statement:** Dutch national flag implementation.
-*   **Java Code:**
-    ```java
-    public void sortColors(int[] nums) {
-        int low = 0, mid = 0, high = nums.length - 1;
-        while (mid <= high) {
-            if (nums[mid] == 0) {
-                int temp = nums[low];
-                nums[low++] = nums[mid];
-                nums[mid++] = temp;
-            } else if (nums[mid] == 1) {
-                mid++;
-            } else {
-                int temp = nums[mid];
-                nums[mid] = nums[high];
-                nums[high--] = temp;
-            }
-        }
-    }
-    ```
-*   **Complexity:** Time: $O(N)$, Space: $O(1)$
-
----
-
-### Q48: Longest Substring Without Repeating Characters
-*   **Problem Statement:** Length of longest unique characters substring.
-*   **Java Code:**
-    ```java
-    import java.util.HashMap;
-    public int lengthOfLongestSubstring(String s) {
-        HashMap<Character, Integer> map = new HashMap<>();
-        int left = 0, max = 0;
-        for (int right = 0; right < s.length(); right++) {
-            char c = s.charAt(right);
-            if (map.containsKey(c)) {
-                left = Math.max(left, map.get(c) + 1);
-            }
-            map.put(c, right);
-            max = Math.max(max, right - left + 1);
-        }
-        return max;
-    }
-    ```
-*   **Complexity:** Time: $O(N)$, Space: $O(min(N, A))$ where $A$ is alphabet size.
-
----
-
-### Q49: Rotate Image (Rotate Matrix 90 degrees)
-*   **Problem Statement:** Rotate square matrix 90 degrees clockwise in place.
-*   **Java Code:**
-    ```java
-    public void rotate(int[][] matrix) {
-        int n = matrix.length;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                int temp = matrix[i][j];
-                matrix[i][j] = matrix[j][i];
-                matrix[j][i] = temp;
-            }
-        }
-        for (int i = 0; i < n; i++) {
-            int l = 0, r = n - 1;
-            while (l < r) {
-                int temp = matrix[i][l];
-                matrix[i][l++] = matrix[i][r];
-                matrix[i][r--] = temp;
-            }
-        }
-    }
-    ```
-*   **Complexity:** Time: $O(N^2)$, Space: $O(1)$
-
----
-
-### Q50: Subarray Sums Divisible by K
-*   **Problem Statement:** Count subarrays whose sum is divisible by $K$.
-*   **Java Code:**
-    ```java
-    import java.util.HashMap;
-    public int subarraysDivByK(int[] nums, int k) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1);
-        int sum = 0, count = 0;
-        for (int num : nums) {
-            sum += num;
-            int rem = sum % k;
-            if (rem < 0) rem += k; // Handle negative remainders in Java
-            if (map.containsKey(rem)) {
-                count += map.get(rem);
-            }
-            map.put(rem, map.getOrDefault(rem, 0) + 1);
-        }
-        return count;
-    }
-    ```
-*   **Complexity:** Time: $O(N)$, Space: $O(K)$
-*   **Common Mistake:** Forgetting that modulo operation in Java can yield negative outcomes (`-5 % 3 = -2`). Make sure to normalize negative remainders using `rem += k`.
+*   **Interview Point:** Handled via Stack mapping closing parentheses immediately.
+*   **Common Mistake:** Forgetting to run `.isEmpty()` check at the end.

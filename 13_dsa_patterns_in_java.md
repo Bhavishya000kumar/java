@@ -189,15 +189,72 @@ Finding the maximum sum subarray.
 
 ---
 
-### 11. Interview Point
-*   **Can we implement a binary search on custom object collections?**
-    Yes, Java's `Collections.binarySearch(list, key)` can search lists directly, provided elements implement `Comparable` or you pass a custom `Comparator`.
+### Pattern 7: Binary Search on Answer (Optimization)
 
-### 12. Coding-Platform Usage
-Keep these snippets handy. They allow quick translations of algorithms designed in C++ to compile successfully on platforms like LeetCode and HackerRank in Java.
+#### Description
+Finds boundary matching monotonic criteria (e.g. minimum capacity, speed, or distance limit).
 
-### 13. Quick Revision
-*   Anonymous returns: Use `new int[]{left, right}`.
-*   Min/Max: Use `Math.min()` and `Math.max()`.
-*   Frequency: Use `map.put(key, map.getOrDefault(key, 0) + 1)`.
-*   Array sizing: Use `.length` parameter.
+*   **C++ Template:**
+    ```cpp
+    int low = minVal, high = maxVal, ans = -1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (isValid(arr, mid, target)) {
+            ans = mid;
+            high = mid - 1; // Try to search left for smaller minimum
+        } else {
+            low = mid + 1;
+        }
+    }
+    ```
+*   **Java Template:**
+    ```java
+    int low = minVal;
+    int high = maxVal;
+    int ans = -1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (isValid(arr, mid, target)) {
+            ans = mid;
+            high = mid - 1; // Min optimization
+        } else {
+            low = mid + 1;
+        }
+    }
+    ```
+
+---
+
+### Pattern 8: Recursion (Backtracking/Include-Exclude)
+
+#### Description
+Generates combinations, permutations, subsets, or subsequences.
+
+*   **C++ Template (Pick / Not Pick):**
+    ```cpp
+    void solve(int idx, vector<int>& ds, vector<int>& arr) {
+        if (idx == arr.size()) {
+            process(ds);
+            return;
+        }
+        ds.push_back(arr[idx]); // Pick
+        solve(idx + 1, ds, arr);
+        ds.pop_back(); // Backtrack
+        solve(idx + 1, ds, arr); // Not Pick
+    }
+    ```
+*   **Java Template (Pick / Not Pick):**
+    ```java
+    public void solve(int idx, List<Integer> ds, int[] arr, List<List<Integer>> ans) {
+        if (idx == arr.length) {
+            ans.add(new ArrayList<>(ds)); // Deep copy reference values
+            return;
+        }
+        ds.add(arr[idx]); // Pick
+        solve(idx + 1, ds, arr, ans);
+        ds.remove(ds.size() - 1); // Backtrack / Exclude
+        solve(idx + 1, ds, arr, ans); // Not Pick
+    }
+    ```
+*   **Important Java Syntax Difference:**
+    In C++, `ds` is passed by reference and copied to target matrix output cleanly. In Java, adding a reference directly with `ans.add(ds)` will cause issues because `ds` will end up being modified. You **must** create a new instance duplicate copy via `new ArrayList<>(ds)`.
